@@ -14,13 +14,13 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
     }
 
     h1 {
       font-size: 3rem;
-      margin-bottom: 1rem;
+      margin-top: 80px;
     }
 
     h2 {
@@ -29,7 +29,7 @@
     }
 
     .verse {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       font-style: italic;
       font-size: 1.2rem;
@@ -74,23 +74,83 @@
     .dropdown a:hover {
       background-color: #f3e5f5;
     }
+
+    #gallery {
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .media {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .media:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    .modal video, .modal img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+    }
+
+    .together {
+      font-size: 1rem;
+      margin-top: 2rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="menu">
     <button class="menu-button" onclick="toggleMenu()">Menu</button>
     <div class="dropdown" id="dropdown">
-      <a href="home.html">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#countdowns">Countdowns</a>
-      <a href="#bucketlist">Bucket List</a>
-      <a href="#reasons">Reasons I Love You</a>
-      <a href="#support">Open When You Need It</a>
+      <a href="#" onclick="refreshPage()">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="countdown.html">Countdowns</a>
+      <a href="bucketlist.html">Bucket List</a>
+      <a href="reasons.html">Reasons I Love You</a>
+      <a href="support.html">Open When You Need It</a>
+      <a href="#" onclick="displayTogetherTime()">How Long We've Been Together</a>
     </div>
   </div>
 
   <h1>Welcome My Princess 💜</h1>
   <h2>Every time I see you, I give thanks to God</h2>
+
+  <div class="together" id="togetherTime"></div>
+
+  <div class="modal" id="mediaModal" onclick="closeModal()">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 
   <div class="verse" id="bibleVerse"></div>
 
@@ -98,6 +158,10 @@
     function toggleMenu() {
       const dropdown = document.getElementById("dropdown");
       dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+    }
+
+    function refreshPage() {
+      location.href = "index.html";
     }
 
     const bibleVerses = [
@@ -113,6 +177,40 @@
 
     const randomVerse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
     document.getElementById("bibleVerse").innerText = randomVerse;
+
+    function openModal(src) {
+      const modal = document.getElementById("mediaModal");
+      const content = document.getElementById("modalContent");
+      modal.style.display = "flex";
+
+      if (src.endsWith(".mp4")) {
+        content.innerHTML = `<video src="${src}" controls autoplay></video>`;
+      } else {
+        content.innerHTML = `<img src="${src}" alt="Media" />`;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("mediaModal").style.display = "none";
+      document.getElementById("modalContent").innerHTML = "";
+    }
+
+    function displayTogetherTime() {
+      const startDate = new Date("2022-11-15T00:00:00");
+      const now = new Date();
+      const diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(months / 12);
+
+      const togetherText = `YEARS: ${years}, MONTHS: ${months % 12}, WEEKS: ${weeks % 4}, DAYS: ${days % 7}, HOURS: ${hours % 24}, MINUTES: ${minutes % 60}, SECONDS: ${seconds % 60}`;
+      document.getElementById("togetherTime").innerText = togetherText;
+    }
   </script>
 </body>
 </html>
