@@ -14,18 +14,21 @@
       min-height: 100vh;
       position: relative;
     }
+
     .gallery-header {
       text-align: center;
       margin: 30px 0;
       font-size: 2.5rem;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
+
     .gallery-nav {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin-bottom: 20px;
     }
+
     .gallery-nav button {
       background: rgba(255,255,255,0.2);
       border: none;
@@ -36,9 +39,11 @@
       transition: all 0.3s;
       font-size: 1rem;
     }
+
     .gallery-nav button:hover {
       background: rgba(255,255,255,0.4);
     }
+
     .gallery-section {
       display: none;
       animation: fadeIn 0.5s;
@@ -46,50 +51,62 @@
       margin: 0 auto;
       padding: 20px;
     }
+
     .gallery-section.active {
       display: block;
     }
+
     .image-gallery, .video-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
     }
-    .image-gallery img, .video-item {
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.4s ease;
-    }
-    .image-gallery img:hover, .video-item:hover {
-      transform: rotate(1deg) scale(1.03);
-    }
+
     .image-gallery img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease;
       cursor: pointer;
     }
-    .video-item {
-      background: rgba(255,255,255,0.1);
-      padding: 0;
-      overflow: hidden;
+
+    .image-gallery img:hover {
+      transform: rotate(1deg) scale(1.03);
     }
+
+    .video-item {
+      background: rgba(255,255,255,0.15);
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .video-item:hover {
+      transform: scale(1.03);
+    }
+
     .video-item iframe {
       width: 100%;
-      height: 200px;
+      height: 180px;
       border: none;
       border-radius: 10px;
       display: block;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
     @media (max-width: 768px) {
       .image-gallery, .video-gallery {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       }
     }
-    /* Lightbox */
+
     .lightbox {
       position: fixed;
       top: 0;
@@ -102,22 +119,27 @@
       justify-content: center;
       z-index: 999;
     }
+
     .lightbox img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
       box-shadow: 0 0 10px white;
     }
+
     .lightbox.active {
       display: flex;
     }
-    /* Top-right menu */
+
     .top-menu {
       position: absolute;
       top: 15px;
       right: 20px;
+      display: flex;
+      gap: 10px;
     }
-    .top-menu button {
+
+    .top-menu a button {
       background: rgba(255,255,255,0.2);
       color: white;
       border: none;
@@ -127,18 +149,24 @@
       font-size: 0.9rem;
       transition: 0.3s;
     }
-    .top-menu button:hover {
+
+    .top-menu a button:hover {
       background: rgba(255,255,255,0.4);
+    }
+
+    .top-menu a {
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
- <div class="top-menu">
-    <a href="home.html">Home</a>
-    <a href="countdown.html">Countdown</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="reasons.html">Why I Love You</a>
+  <div class="top-menu">
+    <a href="home.html"><button>Home</button></a>
+    <a href="countdown.html"><button>Countdown</button></a>
+    <a href="bucketlist.html"><button>Bucket List</button></a>
+    <a href="reasons.html"><button>Why I Love You</button></a>
   </div>
+
   <header>
     <h1 class="gallery-header">Our Memories</h1>
     <div class="gallery-nav">
@@ -146,22 +174,24 @@
       <button onclick="showSection('videos')">Videos</button>
     </div>
   </header>
+
   <section id="photos" class="gallery-section active">
     <div class="image-gallery"></div>
   </section>
+
   <section id="videos" class="gallery-section">
-    <div class="video-gallery" id="videoGallery">
-      <!-- Videos will be loaded here -->
-    </div>
+    <div class="video-gallery" id="videoGallery"></div>
   </section>
-  <!-- Lightbox -->
+
   <div class="lightbox" id="lightbox">
     <img src="" alt="Enlarged memory" />
   </div>
+
   <script>
     const imageGallery = document.querySelector('.image-gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
+
     for (let i = 1; i <= 68; i++) {
       const img = document.createElement('img');
       img.src = `images/pic (${i}).jpg`;
@@ -173,16 +203,18 @@
       };
       imageGallery.appendChild(img);
     }
+
     lightbox.onclick = () => {
       lightbox.classList.remove('active');
     };
+
     function showSection(sectionId) {
       document.querySelectorAll('.gallery-section').forEach(section => {
         section.classList.remove('active');
       });
       document.getElementById(sectionId).classList.add('active');
     }
-    // Video links
+
     const videoLinks = [
       "1WS8ZtqWTvRTw6Y8IIKMt_AtXS6oC9uQz","11c5fposZYnDasiyiun60SBoFAjJOjt4y","1XE4_ZOgdbr5I5XEpSItJ78OifDd8cKCj",
       "1q1q6zrkcFaTqhCE66IZ8vhwd-gboiz7G","1Xs-UGRXewmklkrSRceQd_PPl3zVHMm0U","1Le_fATlKCTSTzYwJLJN2xSxoElXdL2mt",
@@ -195,6 +227,7 @@
       "1saXWaJoxsemyN_ajCWrvqcTAs4uBGOsS","10PkpHdbVMqiqMRNhGNkRoxEJWqeQacMv","1QWKMxdbcI7HRbmyOzbfNEBg2A5KzgDd4",
       "13LekqlNpv6KjfD6jC6EF5Wu9pn2b02LQ","1UGCUb7xPpG0C74AQh7hf5Kb1A9BOFGid"
     ];
+
     const videoGallery = document.getElementById('videoGallery');
     videoLinks.forEach(linkId => {
       const videoItem = document.createElement('div');
