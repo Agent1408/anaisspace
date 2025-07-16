@@ -10,11 +10,8 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #fff0f5;
       color: #4b0082;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
       text-align: center;
+      padding-bottom: 80px;
     }
 
     .menu {
@@ -56,24 +53,68 @@
     }
 
     h1 {
-      font-size: 3rem;
-      margin-top: 100px;
+      margin-top: 80px;
+      font-size: 2.5rem;
       color: #800080;
     }
 
-    .countdown {
-      margin-top: 2rem;
-      font-size: 2rem;
+    .countdowns {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .countdown-box {
+      border: 2px solid #dda0dd;
+      border-radius: 12px;
+      padding: 15px 25px;
+      background-color: #fce4ec;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    .form {
+      margin-top: 30px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #800080;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #800080;
+      color: white;
+      cursor: pointer;
     }
 
     .verse {
       position: fixed;
-      bottom: 20px;
+      bottom: 10px;
       font-style: italic;
-      font-size: 1.2rem;
-      text-align: center;
+      font-size: 1.1rem;
       width: 100%;
+      color: #4b0082;
+      text-align: center;
     }
   </style>
 </head>
@@ -90,53 +131,24 @@
     </div>
   </div>
 
-  <h1>Countdown to Our Special Day 💜</h1>
-  <div class="countdown" id="countdownTimer"></div>
+  <h1>⏳ Our Countdowns 💜</h1>
+  
+  <div class="countdowns" id="countdownList"></div>
+
+  <div class="form">
+    <h3>Add New Countdown</h3>
+    <input type="text" id="eventName" placeholder="Event Name" required>
+    <input type="date" id="eventDate" required>
+    <button onclick="addCountdown()">Add</button>
+  </div>
+
   <div class="verse" id="bibleVerse"></div>
 
   <script>
+    const dropdown = document.getElementById("dropdown");
     function toggleMenu() {
-      const dropdown = document.getElementById("dropdown");
       dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
     }
-
-    // Countdown logic (example: wedding date or anniversary)
-    const targetDate = new Date("2026-05-15T00:00:00"); // Change this to your date
-    const timer = document.getElementById("countdownTimer");
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        timer.innerText = "The special day is here! 💍🎉";
-        return;
-      }
-
-      const seconds = Math.floor(diff / 1000) % 60;
-      const minutes = Math.floor(diff / 1000 / 60) % 60;
-      const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
-      const days = Math.floor(diff / 1000 / 60 / 60 / 24);
-
-      timer.innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    const bibleVerses = [
-      "'I have found the one whom my soul loves.' – Song of Solomon 3:4",
-      "'Love is patient, love is kind.' – 1 Corinthians 13:4",
-      "'Two are better than one.' – Ecclesiastes 4:9",
-      "'I thank my God every time I remember you.' – Philippians 1:3",
-      "'Above all, love each other deeply.' – 1 Peter 4:8",
-      "'Let all that you do be done in love.' – 1 Corinthians 16:14",
-      "'The Lord has done great things for us, and we are filled with joy.' – Psalm 126:3",
-      "'You are altogether beautiful, my love; there is no flaw in you.' – Song of Solomon 4:7"
-    ];
-
-    const randomVerse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
-    document.getElementById("bibleVerse").innerText = randomVerse;
 
     function displayTogetherTime() {
       const startDate = new Date("2025-04-03T00:00:00");
@@ -153,6 +165,122 @@
 
       alert(`YEARS: ${years}, MONTHS: ${months % 12}, WEEKS: ${weeks % 4}, DAYS: ${days % 7}, HOURS: ${hours % 24}, MINUTES: ${minutes % 60}, SECONDS: ${seconds % 60}`);
     }
+
+    const bibleVerses = [
+      "'I have found the one whom my soul loves.' – Song of Solomon 3:4",
+      "'Love is patient, love is kind.' – 1 Corinthians 13:4",
+      "'Two are better than one.' – Ecclesiastes 4:9",
+      "'I thank my God every time I remember you.' – Philippians 1:3",
+      "'Above all, love each other deeply.' – 1 Peter 4:8",
+      "'Let all that you do be done in love.' – 1 Corinthians 16:14",
+      "'The Lord has done great things for us, and we are filled with joy.' – Psalm 126:3",
+      "'You are altogether beautiful, my love; there is no flaw in you.' – Song of Solomon 4:7"
+    ];
+    document.getElementById("bibleVerse").innerText = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
+
+    function getNextAnniversary() {
+      const now = new Date();
+      let year = now.getFullYear();
+      let month = now.getMonth();
+      const today = now.getDate();
+
+      if (today >= 3) {
+        month++;
+        if (month > 11) {
+          month = 0;
+          year++;
+        }
+      }
+      return new Date(year, month, 3, 0, 0, 0);
+    }
+
+    function loadCountdowns() {
+      const saved = JSON.parse(localStorage.getItem("customCountdowns")) || [];
+      return saved;
+    }
+
+    function saveCountdowns(list) {
+      localStorage.setItem("customCountdowns", JSON.stringify(list));
+    }
+
+    function renderCountdowns() {
+      const list = document.getElementById("countdownList");
+      list.innerHTML = '';
+
+      // Pinned Anniversary Countdown
+      const anniversaryDate = getNextAnniversary();
+      list.appendChild(createCountdownBox("💜 Monthly Anniversary 💜", anniversaryDate, false));
+
+      // Custom Countdowns
+      const saved = loadCountdowns();
+      saved.forEach((c, index) => {
+        list.appendChild(createCountdownBox(c.name, new Date(c.date), true, index));
+      });
+    }
+
+    function createCountdownBox(name, date, deletable, index = null) {
+      const box = document.createElement("div");
+      box.className = "countdown-box";
+
+      const nameEl = document.createElement("div");
+      nameEl.style.fontWeight = "bold";
+      nameEl.style.fontSize = "1.2rem";
+      nameEl.innerText = name;
+
+      const timer = document.createElement("div");
+
+      function update() {
+        const now = new Date();
+        const diff = date - now;
+
+        if (diff <= 0) {
+          timer.innerText = "🎉 It's today!";
+          return;
+        }
+
+        const seconds = Math.floor(diff / 1000) % 60;
+        const minutes = Math.floor(diff / 1000 / 60) % 60;
+        const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+        const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+        timer.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      update();
+      setInterval(update, 1000);
+
+      box.appendChild(nameEl);
+      box.appendChild(timer);
+
+      if (deletable) {
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.innerText = "×";
+        del.onclick = () => {
+          const list = loadCountdowns();
+          list.splice(index, 1);
+          saveCountdowns(list);
+          renderCountdowns();
+        };
+        box.appendChild(del);
+      }
+
+      return box;
+    }
+
+    function addCountdown() {
+      const name = document.getElementById("eventName").value.trim();
+      const date = document.getElementById("eventDate").value;
+      if (!name || !date) return alert("Please enter both name and date.");
+
+      const saved = loadCountdowns();
+      saved.push({ name, date });
+      saveCountdowns(saved);
+      document.getElementById("eventName").value = '';
+      document.getElementById("eventDate").value = '';
+      renderCountdowns();
+    }
+
+    renderCountdowns();
   </script>
 </body>
 </html>
