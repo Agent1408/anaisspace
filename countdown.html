@@ -18,6 +18,34 @@
       color: #4b0082;
     }
 
+    .top-menu {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .top-menu a button {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .top-menu a button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    .top-menu a {
+      text-decoration: none;
+    }
+
     nav {
       width: 220px;
       background-color: #800080;
@@ -153,6 +181,13 @@
 </head>
 <body>
 
+  <div class="top-menu">
+    <a href="home.html"><button>Home</button></a>
+    <a href="gallery.html"><button>Gallery</button></a>
+    <a href="bucketlist.html"><button>Bucket List</button></a>
+    <a href="reasons.html"><button>Why I Love You</button></a>
+  </div>
+
   <nav>
     <h2>Menu</h2>
     <a href="home.html">Home</a>
@@ -269,7 +304,6 @@
       eventDateInput.value = '';
     });
 
-    // Initial render
     renderCountdowns();
     updateTimers();
     setInterval(updateTimers, 1000);
