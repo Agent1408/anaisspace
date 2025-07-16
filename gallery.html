@@ -1,208 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Gallery</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #b799ff, #e0b3ff);
-      color: white;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-    }
+<!-- Photo Gallery -->
+<section id="photos" class="gallery-section active">
+  <div class="image-gallery" id="imageGallery"></div>
+</section>
 
-    .gallery-header {
-      text-align: center;
-      margin: 30px 0;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .gallery-nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .gallery-nav button {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1rem;
-    }
-
-    .gallery-nav button:hover {
-      background: rgba(255,255,255,0.4);
-    }
-
-    .gallery-section {
-      display: none;
-      animation: fadeIn 0.5s;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .gallery-section.active {
-      display: block;
-    }
-
-    .image-gallery, .video-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .image-gallery img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .image-gallery img:hover {
-      transform: scale(1.03);
-    }
-
-    .video-item {
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .video-item iframe {
-      width: 100%;
-      height: 200px;
-      border: none;
-      border-radius: 8px;
-    }
-
-    .video-item p {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-      .image-gallery, .video-gallery {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      }
-    }
-
-    /* Lightbox styling */
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 10px;
-    }
-
-    .lightbox:target {
-      display: flex;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1 class="gallery-header">Our Memories</h1>
-    <div class="gallery-nav">
-      <button onclick="showSection('photos')">Photos</button>
-      <button onclick="showSection('videos')">Videos</button>
-    </div>
-  </header>
-
-  <!-- Lightbox Popup -->
-  <div id="lightbox" class="lightbox" onclick="this.style.display='none'">
-    <img id="lightbox-img" src="" alt="Enlarged Image">
+<!-- Custom Lightbox with Arrows -->
+<div class="lightbox" id="lightbox">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-title"></p>
+  <div class="lightbox-controls">
+    <span onclick="prevImage()">&#10094;</span>
+    <span onclick="nextImage()">&#10095;</span>
   </div>
+</div>
 
-  <!-- Photo Gallery -->
-  <section id="photos" class="gallery-section active">
-    <div class="image-gallery"></div>
-  </section>
+<style>
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    color: white;
+  }
 
-  <!-- Video Gallery -->
-  <section id="videos" class="gallery-section">
-    <div class="video-gallery">
-      <!-- Loop to render all 16 videos -->
-      <script>
-        const videoLinks = [
-          "1WS8ZtqWTvRTw6Y8IIKMt_AtXS6oC9uQz",
-          "11c5fposZYnDasiyiun60SBoFAjJOjt4y",
-          "1XE4_ZOgdbr5I5XEpSItJ78OifDd8cKCj",
-          "1q1q6zrkcFaTqhCE66IZ8vhwd-gboiz7G",
-          "1Xs-UGRXewmklkrSRceQd_PPl3zVHMm0U",
-          "1Le_fATlKCTSTzYwJLJN2xSxoElXdL2mt",
-          "1XGQ8YbLpcvW0fa7qVzGqVS-XpHp1hVp5",
-          "1LucIRbUAnoAQgWlk4dluQOu1DGNCPcFZ",
-          "1Zikzal03gW5EA9Z20o65nxPBawy8r5nt",
-          "1DyH5wkCTX1oq7yp1lujA55XDm6SEDTlJ",
-          "1851daWVcVdUPo7cXdr1W4aO2WLQLKP-e",
-          "1vrCZgSZ_1JowWr-Q2WV22yk92tEMLX9S",
-          "1VfxBZaQ6HvYHRgr8KqnWJbEr9hvW2wm2",
-          "1z8Tz2VRlCuK5r5UMjChnZviskusnzFgl",
-          "1GrOmO1uHcQBBEJ3tTO7dPBveqNm5DPym"
-        ];
+  .lightbox img {
+    max-width: 80%;
+    max-height: 70vh;
+    margin-bottom: 10px;
+    border-radius: 12px;
+  }
 
-        videoLinks.forEach((id, index) => {
-          document.write(`
-            <div class="video-item">
-              <iframe src="https://drive.google.com/file/d/${id}/preview" allowfullscreen></iframe>
-              <p>Memory ${index + 1}</p>
-            </div>
-          `);
-        });
-      </script>
-    </div>
-  </section>
+  .lightbox p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
-  <script>
-    // Auto-load 58 images
-    const imageGallery = document.querySelector('.image-gallery');
-    for (let i = 1; i <= 58; i++) {
-      const img = document.createElement('img');
-      img.src = `images/pic (${i}).jpg`;
-      img.alt = `Our memory ${i}`;
-      img.loading = 'lazy';
-      img.onclick = function () {
-        document.getElementById('lightbox-img').src = this.src;
-        document.getElementById('lightbox').style.display = 'flex';
-      };
-      imageGallery.appendChild(img);
-    }
+  .lightbox .close {
+    position: absolute;
+    top: 20px; right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
 
-    // Section switcher
-    function showSection(sectionId) {
-      document.querySelectorAll('.gallery-section').forEach(section => {
-        section.classList.remove('active');
-      });
-      document.getElementById(sectionId).classList.add('active');
-    }
-  </script>
-</body>
-</html>
+  .lightbox-controls {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .lightbox-controls span {
+    font-size: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .image-caption {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 1rem;
+    color: white;
+  }
+</style>
+
+<script>
+  const imageData = Array.from({ length: 58 }, (_, i) => ({
+    src: `images/pic (${i + 1}).jpg`,
+    title: `Memory ${i + 1}` // <-- You can change these titles later
+  }));
+
+  const gallery = document.getElementById('imageGallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+
+  let currentIndex = 0;
+
+  imageData.forEach((img, index) => {
+    const container = document.createElement('div');
+    container.style.textAlign = 'center';
+
+    const image = document.createElement('img');
+    image.src = img.src;
+    image.alt = img.title;
+    image.loading = 'lazy';
+    image.onclick = () => openLightbox(index);
+
+    const caption = document.createElement('p');
+    caption.className = 'image-caption';
+    caption.textContent = img.title;
+
+    container.appendChild(image);
+    container.appendChild(caption);
+    gallery.appendChild(container);
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightbox.style.display = 'flex';
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    lightboxImg.src = imageData[currentIndex].src;
+    lightboxTitle.textContent = imageData[currentIndex].title;
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + imageData.length) % imageData.length;
+    updateLightbox();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % imageData.length;
+    updateLightbox();
+  }
+
+  // Close lightbox with Esc key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") prevImage();
+    if (e.key === "ArrowRight") nextImage();
+  });
+</script>
