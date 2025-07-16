@@ -2,62 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #800080;
-      color: #fff;
+      background: linear-gradient(to bottom right, #ffe6f0, #e6ccff);
+      color: #4b0082;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
-  h1 {
-  font-size: 4rem;
-  margin-top: 80px;
-  font-family: 'Cursive', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  animation: heartbeat 1.5s infinite ease-in-out, glow 3s infinite alternate;
-  color: #800080;
-}
-
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.3);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.3);
-  }
-  70% {
-    transform: scale(1);
-  }
-}
-
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 10px #d8b4e2, 0 0 20px #d8b4e2, 0 0 30px #d8b4e2;
-  }
-  100% {
-    text-shadow: 0 0 20px #b266ff, 0 0 30px #c44dff, 0 0 40px #e066ff;
-  }
-}
-;
+    h1 {
+      font-size: 3rem;
+      margin-top: 80px;
+    }
 
     h2 {
       font-size: 1.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .verse {
@@ -65,8 +34,8 @@
       bottom: 20px;
       font-style: italic;
       font-size: 1.2rem;
-      text-align: center;
       width: 100%;
+      text-align: center;
     }
 
     .menu {
@@ -107,68 +76,56 @@
       background-color: #f3e5f5;
     }
 
-    #gallery {
-      padding: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .media {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      cursor: pointer;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s;
-    }
-
-    .media:hover {
-      transform: scale(1.05);
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-    }
-
-    .modal video, .modal img {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 12px;
-    }
-
     .together {
       font-size: 1rem;
       margin-top: 2rem;
       font-weight: bold;
     }
+
+    /* Floating heart animation */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Date and Time Display -->
-  <div id="datetime" style="position: absolute; top: 20px; left: 20px; color: white; text-align: left;">
-    <div id="currentDate"></div>
-    <div id="currentTime" style="font-size: 0.9rem; margin-top: 2px;"></div>
-  </div>
-
   <div class="menu">
     <button class="menu-button" onclick="toggleMenu()">Menu</button>
     <div class="dropdown" id="dropdown">
@@ -179,18 +136,14 @@
       <a href="reasons.html">Reasons I Love You</a>
       <a href="support.html">Open When You Need It</a>
       <a href="#" onclick="displayTogetherTime()">How Long We've Been Together</a>
+      <a href="index.html">Logout</a>
     </div>
   </div>
 
   <h1>Welcome My Princess 💜</h1>
-  <h2>Every time I see you, I give thanks to God</h2>
+  <h2>Happy to call you mine</h2>
 
   <div class="together" id="togetherTime"></div>
-
-  <div class="modal" id="mediaModal" onclick="closeModal()">
-    <div class="modal-content" id="modalContent"></div>
-  </div>
-
   <div class="verse" id="bibleVerse"></div>
 
   <script>
@@ -199,80 +152,8 @@
       dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
     }
 
-    const bibleVerses = [
-      "'I have found the one whom my soul loves.' – Song of Solomon 3:4",
-      "'Love is patient, love is kind.' – 1 Corinthians 13:4",
-      "'Two are better than one.' – Ecclesiastes 4:9",
-      "'I thank my God every time I remember you.' – Philippians 1:3",
-      "'Above all, love each other deeply.' – 1 Peter 4:8",
-      "'Let all that you do be done in love.' – 1 Corinthians 16:14",
-      "'You are altogether beautiful, my love; there is no flaw in you.' – Song of Solomon 4:7",
-      "'The Lord is compassionate and gracious, slow to anger, abounding in love.' – Psalm 103:8",
-      "'Be devoted to one another in love. Honor one another above yourselves.' – Romans 12:10",
-      "'There is no fear in love. But perfect love drives out fear.' – 1 John 4:18",
-      "'Let love and faithfulness never leave you.' – Proverbs 3:3",
-      "'And now these three remain: faith, hope and love. But the greatest of these is love.' – 1 Corinthians 13:13",
-      "'My beloved is mine and I am his.' – Song of Solomon 2:16",
-      "'This is my commandment, that you love one another as I have loved you.' – John 15:12",
-      "'The Lord has done great things for us, and we are filled with joy.' – Psalm 126:3",
-      "'As I have loved you, so you must love one another.' – John 13:34",
-      "'Rejoice in the Lord always. I will say it again: Rejoice!' – Philippians 4:4",
-      "'He who finds a wife finds what is good and receives favor from the Lord.' – Proverbs 18:22",
-      "'God is love. Whoever lives in love lives in God, and God in them.' – 1 John 4:16",
-      "'Set me as a seal upon your heart.' – Song of Solomon 8:6",
-      "'Love does no harm to a neighbor. Therefore love is the fulfillment of the law.' – Romans 13:10",
-      "'Be completely humble and gentle; be patient, bearing with one another in love.' – Ephesians 4:2",
-      "'We love because He first loved us.' – 1 John 4:19",
-      "'How good and pleasant it is when God’s people live together in unity!' – Psalm 133:1",
-      "'The steadfast love of the Lord never ceases.' – Lamentations 3:22",
-      "'He brought me to the banqueting house, and his banner over me was love.' – Song of Solomon 2:4",
-      "'Do everything in love.' – 1 Corinthians 16:14",
-      "'Love must be sincere. Hate what is evil; cling to what is good.' – Romans 12:9",
-      "'A friend loves at all times.' – Proverbs 17:17",
-      "'Let the morning bring me word of your unfailing love.' – Psalm 143:8",
-      "'I will betroth you to me forever.' – Hosea 2:19",
-      "'With all humility and gentleness, with patience, bearing with one another in love.' – Ephesians 4:2",
-      "'Owe no one anything, except to love each other.' – Romans 13:8",
-      "'Love never ends.' – 1 Corinthians 13:8",
-      "'Better is a dinner of herbs where love is than a fattened ox and hatred with it.' – Proverbs 15:17",
-      "'Hatred stirs up conflict, but love covers over all wrongs.' – Proverbs 10:12",
-      "'Keep on loving one another as brothers and sisters.' – Hebrews 13:1",
-      "'Do not let your hearts be troubled. Trust in God.' – John 14:1",
-      "'Give thanks to the Lord, for he is good; his love endures forever.' – Psalm 107:1",
-      "'Let us not love with words or speech but with actions and in truth.' – 1 John 3:18",
-      "'Clothe yourselves with compassion, kindness, humility, gentleness and patience.' – Colossians 3:12",
-      "'Carry each other’s burdens, and in this way you will fulfill the law of Christ.' – Galatians 6:2",
-      "'Therefore encourage one another and build each other up.' – 1 Thessalonians 5:11",
-      "'Blessed are the peacemakers, for they will be called children of God.' – Matthew 5:9",
-      "'A new command I give you: Love one another.' – John 13:34",
-      "'You are the light of the world.' – Matthew 5:14",
-      "'Let your light shine before others.' – Matthew 5:16",
-      "'You will seek me and find me when you seek me with all your heart.' – Jeremiah 29:13",
-      "'I am my beloved’s and my beloved is mine.' – Song of Solomon 6:3"
-    ];
-
-    const randomVerse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
-    document.getElementById("bibleVerse").innerText = randomVerse;
-
-    function openModal(src) {
-      const modal = document.getElementById("mediaModal");
-      const content = document.getElementById("modalContent");
-      modal.style.display = "flex";
-
-      if (src.endsWith(".mp4")) {
-        content.innerHTML = `<video src="${src}" controls autoplay></video>`;
-      } else {
-        content.innerHTML = `<img src="${src}" alt="Media" />`;
-      }
-    }
-
-    function closeModal() {
-      document.getElementById("mediaModal").style.display = "none";
-      document.getElementById("modalContent").innerHTML = "";
-    }
-
     function displayTogetherTime() {
-      const startDate = new Date("2025-04-03T00:00:00");
+      const startDate = new Date("2022-11-15T00:00:00");
       const now = new Date();
       const diff = now - startDate;
 
@@ -288,18 +169,21 @@
       document.getElementById("togetherTime").innerText = togetherText;
     }
 
-    // Date and Time Function
-    function updateDateTime() {
-      const now = new Date();
-      const date = now.toDateString();
-      const time = now.toLocaleTimeString();
+    const bibleVerses = [/* -- 50 verses from previous reply -- */];
 
-      document.getElementById("currentDate").innerText = date;
-      document.getElementById("currentTime").innerText = time;
+    // Pick a random verse
+    const verse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
+    document.getElementById("bibleVerse").innerText = verse;
+
+    // Generate floating hearts
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.animationDuration = `${4 + Math.random() * 6}s`;
+      heart.style.width = heart.style.height = `${10 + Math.random() * 20}px`;
+      document.body.appendChild(heart);
     }
-
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
   </script>
 </body>
 </html>
