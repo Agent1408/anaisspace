@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Bucket List</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #fff0f5;
+      color: #4b0082;
+    }
+
+    nav {
+      width: 220px;
+      background-color: #800080;
+      color: white;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav h2 {
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem;
+      width: 60%;
+      border-radius: 8px;
+      border: 1px solid #800080;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-left: 1rem;
+      background-color: #800080;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a040a0;
+    }
+
+    ul {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      background-color: white;
+      border: 2px solid #800080;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(128,0,128,0.1);
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #a0a0a0;
+    }
+
+    .actions button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 0.5rem;
+      color: #800080;
+    }
+
+    .actions button:hover {
+      color: #a040a0;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>Menu</h2>
+    <a href="home.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="countdowns.html">Countdowns</a>
+    <a href="reasons.html">Reasons</a>
+    <a href="openwhen.html">Open When</a>
+    <a href="howlong.html">How Long</a>
+  </nav>
+
+  <main>
+    <h1>Our Bucket List 🪣💜</h1>
+    <form id="bucketForm">
+      <input type="text" id="bucketItem" placeholder="Add something we want to do together..." required />
+      <button type="submit">Add</button>
+    </form>
+
+    <ul id="bucketList"></ul>
+  </main>
+
+  <script>
+    const form = document.getElementById('bucketForm');
+    const input = document.getElementById('bucketItem');
+    const list = document.getElementById('bucketList');
+
+    let bucketItems = JSON.parse(localStorage.getItem('bucketList') || '[]');
+
+    function saveItems() {
+      localStorage.setItem('bucketList', JSON.stringify(bucketItems));
+    }
+
+    function renderItems() {
+      list.innerHTML = '';
+      if (bucketItems.length === 0) {
+        list.innerHTML = '<p style="text-align:center;">No items yet. Start dreaming!</p>';
+        return;
+      }
+
+      bucketItems.forEach((item, index) => {
+        const li = document.createElement('li');
+        if (item.completed) li.classList.add('completed');
+
+        li.innerHTML = `
+          <span>${item.text}</span>
+          <div class="actions">
+            <button onclick="toggleComplete(${index})">${item.completed ? 'Undo' : 'Done'}</button>
+            <button onclick="deleteItem(${index})">Delete</button>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function toggleComplete(index) {
+      bucketItems[index].completed = !bucketItems[index].completed;
+      saveItems();
+      renderItems();
+    }
+
+    function deleteItem(index) {
+      bucketItems.splice(index, 1);
+      saveItems();
+      renderItems();
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (text) {
+        bucketItems.push({ text, completed: false });
+        input.value = '';
+        saveItems();
+        renderItems();
+      }
+    });
+
+    renderItems();
+  </script>
+</body>
+</html>
