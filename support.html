@@ -1,151 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open When You Need It</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom right, #fdf6ff, #e8d4f0);
-            padding: 40px;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            color: #6a1b9a;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-        .card:hover {
-            transform: scale(1.03);
-        }
-        .emoji {
-            font-size: 1.5em;
-        }
-        blockquote {
-            font-style: italic;
-            color: #555;
-            margin: 15px 0;
-        }
-        .verse {
-            color: #6a1b9a;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Open When You Need It</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #fdf6ff, #e8d4f0);
+      padding: 60px 20px 40px;
+      color: #333;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+      color: #6a1b9a;
+    }
+
+    .top-menu {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .top-menu a button {
+      background: rgba(106, 27, 154, 0.2);
+      color: #6a1b9a;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .top-menu a button:hover {
+      background: rgba(106, 27, 154, 0.4);
+    }
+
+    .top-menu a {
+      text-decoration: none;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .emoji {
+      font-size: 1.5em;
+    }
+
+    blockquote {
+      font-style: italic;
+      color: #555;
+      margin: 15px 0 0;
+    }
+
+    .verse {
+      color: #6a1b9a;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <!-- Menu -->
-<div class="menu">
-  <button class="menu-button" onclick="toggleMenu()">Menu</button>
-  <div class="dropdown" id="dropdown">
-    <a href="home.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="countdown.html">Countdowns</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="reasons.html">Reasons I Love You</a>
+
+  <!-- Top Right Menu -->
+  <div class="top-menu">
+    <a href="home.html"><button>Home</button></a>
+    <a href="gallery.html"><button>Gallery</button></a>
+    <a href="countdown.html"><button>Countdown</button></a>
+    <a href="bucketlist.html"><button>Bucket List</button></a>
+    <a href="reasons.html"><button>Why I Love You</button></a>
   </div>
-</div>
 
-    <h1>Open When You Need It 💌</h1>
-    <div class="container">
+  <h1>Open When You Need It 💌</h1>
+  <div class="container">
 
-        <div class="card">
-            <div class="emoji">😊</div>
-            <h3>Happy</h3>
-            <p>“I love seeing you happy even if it’s through a screen or a text. Your joy lifts me, even from far away. Like that time you called me your chalant boyfriend or when we joked in our courtroom roleplay — it reminds me how blessed I am to love someone so rare. Your happiness means everything to me, Anaïs. Keep smiling, my love. I’m always cheering for you.”</p>
-            <blockquote class="verse">“A joyful heart is good medicine, but a crushed spirit dries up the bones.” — Proverbs 17:22</blockquote>
-        </div>
+    <!-- All your cards below (same as before) -->
+    <!-- Copy/paste each .card block from your current version -->
 
-        <div class="card">
-            <div class="emoji">😖</div>
-            <h3>Stressed</h3>
-            <p>“Breathe, baby. I know the pressure of expectations, and life can be a lot, especially now that we’re apart. But you’ve always been strong. Remember how you still held everything together during IB even when it was overwhelming? That strength is still in you. I’m not there to hold your hand physically, but spiritually, I’m right beside you, praying for you.”</p>
-            <blockquote class="verse">“Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.” — Psalm 55:22</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">😩</div>
-            <h3>Exhausted</h3>
-            <p>“I know you’re tired mentally, emotionally, maybe even spiritually. I wish I could be there to rub your back or just hold you quietly. But even across the miles, know this: you’re not alone. Sleep peacefully knowing someone out here is thinking of you with love so deep, only God can fully understand it.”</p>
-            <blockquote class="verse">“Come to me, all you who are weary and burdened, and I will give you rest.” — Matthew 11:28</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🩸</div>
-            <h3>Period</h3>
-            <p>“I know it sucks to go through this every month without someone there to comfort you. But I’m sending my love, warmth, and the biggest virtual cuddle right now. Rest, hydrate, and treat yourself like the queen you are. If I were there, I’d buy you snacks, wrap you in a blanket, and kiss your hand gently. You’re strong, even on the hard days.”</p>
-            <blockquote class="verse">“She is clothed with strength and dignity; she can laugh at the days to come.” — Proverbs 31:25</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">💬</div>
-            <h3>Reassurance</h3>
-            <p>“I know the distance can make us question things, but baby, let me remind you: it’s still you. It has always been you. Your voice, your laugh, your peace, your fire, I don’t want anyone else. This space between us? Just a test. But our love is built to last. You’re not too much, you’re everything I’ve been praying for.”</p>
-            <blockquote class="verse">“Love bears all things, believes all things, hopes all things, endures all things.” — 1 Corinthians 13:7</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🤍</div>
-            <h3>Needs to Be Loved</h3>
-            <p>“Anaïs, you are deeply loved. Even when I can’t hold your hand or cuddle you, I still feel you in everything. Your voice is my calm, your smile my strength. If love could travel, mine would already be in your arms. Don’t doubt it for a second, I’m yours, heart and soul.”</p>
-            <blockquote class="verse">“I have loved you with an everlasting love; I have drawn you with unfailing kindness.” — Jeremiah 31:3</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🫂</div>
-            <h3>Encouragement</h3>
-            <p>“Don’t let fear or failure speak louder than your purpose. You are intelligent, beautiful, and capable. This season is tough, but it’s temporary. I believe in you with all I am. You’ve overcome so much already — remember IB, CAS, and all those sleepless nights? You’re unstoppable, baby. Keep going. I’m with you.”</p>
-            <blockquote class="verse">“I can do all things through Christ who strengthens me.” — Philippians 4:13</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🔥</div>
-            <h3>Feeling Freaky</h3>
-            <p>“Let’s not lie… distance doesn’t make the feelings fade 😏. I still remember our kisses, the way you let me hold you close, bite your hand, whisper things in your ear, and go to places 😏. I’ve been patient, and I’ll keep being patient, but just know that when we finally reunite, I’ll love you in every way you’ve dreamed of. Gently. Passionately. Completely. Till then… keep teasing me with those eyes on video call 😅.”</p>
-            <blockquote class="verse">“Enjoy life with the wife you love, all the days of your fleeting life.” — Ecclesiastes 9:9</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">🤒</div>
-            <h3>Sick</h3>
-            <p>“If I could, I’d be there making you soup, holding your hand, and watching something comforting with you. But since I can't, please know I’m praying for your healing and comfort. Rest well, drink lots of water, and let yourself be taken care of — even from afar. I love you, sick or healthy.”</p>
-            <blockquote class="verse">“He heals the brokenhearted and binds up their wounds.” — Psalm 147:3</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">💭</div>
-            <h3>Misses Me</h3>
-            <p>“I miss you too, baby — every single day. Your voice, your eyes, your little expressions. But missing each other means we have something so real, so worth it. It won’t be forever. One day, we’ll laugh at how hard it used to be. Till then, close your eyes and remember every sweet moment. I’m holding you in my heart.”</p>
-            <blockquote class="verse">“The Lord watch between you and me, when we are out of one another’s sight.” — Genesis 31:49</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">😔</div>
-            <h3>Angry at Me</h3>
-            <p>“If I ever made you feel unimportant or unheard, I’m truly sorry. I never want to be the reason for your pain. You mean too much to me. I’m learning, growing, and I’ll keep doing better — because you deserve love that listens, apologizes, and changes. I’m here, when you're ready.”</p>
-            <blockquote class="verse">“Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.” — Ephesians 4:32</blockquote>
-        </div>
-
-        <div class="card">
-            <div class="emoji">💤</div>
-            <h3>Feeling Down</h3>
-            <p>“Some days don’t have a reason. And that’s okay. You don’t always have to be okay or strong. I’ll be strong for you. Rest, breathe, cry if you need to. I’ll be right here, always ready to love you through it. You’re never too much. You’re my everything, on every kind of day.”</p>
-            <blockquote class="verse">“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” — Psalm 34:18</blockquote>
-        </div>
-
+    <!-- Happy -->
+    <div class="card">
+      <div class="emoji">😊</div>
+      <h3>Happy</h3>
+      <p>“I love seeing you happy even if it’s through a screen or a text. Your joy lifts me, even from far away. Like that time you called me your chalant boyfriend or when we joked in our courtroom roleplay — it reminds me how blessed I am to love someone so rare. Your happiness means everything to me, Anaïs. Keep smiling, my love. I’m always cheering for you.”</p>
+      <blockquote class="verse">“A joyful heart is good medicine, but a crushed spirit dries up the bones.” — Proverbs 17:22</blockquote>
     </div>
+
+    <!-- Stressed -->
+    <div class="card">
+      <div class="emoji">😖</div>
+      <h3>Stressed</h3>
+      <p>“Breathe, baby. I know the pressure of expectations, and life can be a lot, especially now that we’re apart. But you’ve always been strong. Remember how you still held everything together during IB even when it was overwhelming? That strength is still in you. I’m not there to hold your hand physically, but spiritually, I’m right beside you, praying for you.”</p>
+      <blockquote class="verse">“Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.” — Psalm 55:22</blockquote>
+    </div>
+
+    <!-- Exhausted -->
+    <div class="card">
+      <div class="emoji">😩</div>
+      <h3>Exhausted</h3>
+      <p>“I know you’re tired mentally, emotionally, maybe even spiritually. I wish I could be there to rub your back or just hold you quietly. But even across the miles, know this: you’re not alone. Sleep peacefully knowing someone out here is thinking of you with love so deep, only God can fully understand it.”</p>
+      <blockquote class="verse">“Come to me, all you who are weary and burdened, and I will give you rest.” — Matthew 11:28</blockquote>
+    </div>
+
+    <!-- Period -->
+    <div class="card">
+      <div class="emoji">🩸</div>
+      <h3>Period</h3>
+      <p>“I know it sucks to go through this every month without someone there to comfort you. But I’m sending my love, warmth, and the biggest virtual cuddle right now. Rest, hydrate, and treat yourself like the queen you are. If I were there, I’d buy you snacks, wrap you in a blanket, and kiss your hand gently. You’re strong, even on the hard days.”</p>
+      <blockquote class="verse">“She is clothed with strength and dignity; she can laugh at the days to come.” — Proverbs 31:25</blockquote>
+    </div>
+
+    <!-- Reassurance -->
+    <div class="card">
+      <div class="emoji">💬</div>
+      <h3>Reassurance</h3>
+      <p>“I know the distance can make us question things, but baby, let me remind you: it’s still you. It has always been you. Your voice, your laugh, your peace, your fire, I don’t want anyone else. This space between us? Just a test. But our love is built to last. You’re not too much, you’re everything I’ve been praying for.”</p>
+      <blockquote class="verse">“Love bears all things, believes all things, hopes all things, endures all things.” — 1 Corinthians 13:7</blockquote>
+    </div>
+
+    <!-- Needs to Be Loved -->
+    <div class="card">
+      <div class="emoji">🤍</div>
+      <h3>Needs to Be Loved</h3>
+      <p>“Anaïs, you are deeply loved. Even when I can’t hold your hand or cuddle you, I still feel you in everything. Your voice is my calm, your smile my strength. If love could travel, mine would already be in your arms. Don’t doubt it for a second, I’m yours, heart and soul.”</p>
+      <blockquote class="verse">“I have loved you with an everlasting love; I have drawn you with unfailing kindness.” — Jeremiah 31:3</blockquote>
+    </div>
+
+    <!-- Encouragement -->
+    <div class="card">
+      <div class="emoji">🫂</div>
+      <h3>Encouragement</h3>
+      <p>“Don’t let fear or failure speak louder than your purpose. You are intelligent, beautiful, and capable. This season is tough, but it’s temporary. I believe in you with all I am. You’ve overcome so much already — remember IB, CAS, and all those sleepless nights? You’re unstoppable, baby. Keep going. I’m with you.”</p>
+      <blockquote class="verse">“I can do all things through Christ who strengthens me.” — Philippians 4:13</blockquote>
+    </div>
+
+    <!-- Feeling Freaky -->
+    <div class="card">
+      <div class="emoji">🔥</div>
+      <h3>Feeling Freaky</h3>
+      <p>“Let’s not lie… distance doesn’t make the feelings fade 😏. I still remember our kisses, the way you let me hold you close, bite your hand, whisper things in your ear, and go to places 😏. I’ve been patient, and I’ll keep being patient, but just know that when we finally reunite, I’ll love you in every way you’ve dreamed of. Gently. Passionately. Completely. Till then… keep teasing me with those eyes on video call 😅.”</p>
+      <blockquote class="verse">“Enjoy life with the wife you love, all the days of your fleeting life.” — Ecclesiastes 9:9</blockquote>
+    </div>
+
+    <!-- Sick -->
+    <div class="card">
+      <div class="emoji">🤒</div>
+      <h3>Sick</h3>
+      <p>“If I could, I’d be there making you soup, holding your hand, and watching something comforting with you. But since I can't, please know I’m praying for your healing and comfort. Rest well, drink lots of water, and let yourself be taken care of — even from afar. I love you, sick or healthy.”</p>
+      <blockquote class="verse">“He heals the brokenhearted and binds up their wounds.” — Psalm 147:3</blockquote>
+    </div>
+
+    <!-- Misses Me -->
+    <div class="card">
+      <div class="emoji">💭</div>
+      <h3>Misses Me</h3>
+      <p>“I miss you too, baby — every single day. Your voice, your eyes, your little expressions. But missing each other means we have something so real, so worth it. It won’t be forever. One day, we’ll laugh at how hard it used to be. Till then, close your eyes and remember every sweet moment. I’m holding you in my heart.”</p>
+      <blockquote class="verse">“The Lord watch between you and me, when we are out of one another’s sight.” — Genesis 31:49</blockquote>
+    </div>
+
+    <!-- Angry at Me -->
+    <div class="card">
+      <div class="emoji">😔</div>
+      <h3>Angry at Me</h3>
+      <p>“If I ever made you feel unimportant or unheard, I’m truly sorry. I never want to be the reason for your pain. You mean too much to me. I’m learning, growing, and I’ll keep doing better — because you deserve love that listens, apologizes, and changes. I’m here, when you're ready.”</p>
+      <blockquote class="verse">“Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.” — Ephesians 4:32</blockquote>
+    </div>
+
+    <!-- Feeling Down -->
+    <div class="card">
+      <div class="emoji">💤</div>
+      <h3>Feeling Down</h3>
+      <p>“Some days don’t have a reason. And that’s okay. You don’t always have to be okay or strong. I’ll be strong for you. Rest, breathe, cry if you need to. I’ll be right here, always ready to love you through it. You’re never too much. You’re my everything, on every kind of day.”</p>
+      <blockquote class="verse">“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” — Psalm 34:18</blockquote>
+    </div>
+
+  </div>
 </body>
 </html>
