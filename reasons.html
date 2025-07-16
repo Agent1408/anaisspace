@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reasons Why I Love You 💘</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .reason {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #800080;
+      border-radius: 15px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: #800080;
+      box-shadow: 0 2px 10px rgba(128, 0, 128, 0.15);
+      animation: floatBounce 10s infinite ease-in-out;
+      white-space: nowrap;
+      max-width: 250px;
+    }
+
+    @keyframes floatBounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const reasons = [
+    "You calm me – your presence alone brings peace I can’t explain.",
+    "You’re my safe space – even in silence, I feel at home with you.",
+    "You don’t talk when angry – because you care enough not to hurt me.",
+    "You challenge me – mentally, emotionally, and spiritually.",
+    "You make me laugh – no one cracks me up like you do.",
+    "You make me think – about life, love, future… everything.",
+    "You let me be chalant – while proudly being your nonchalant self.",
+    "You play the judge – and rule on my football games with conditions.",
+    "You allow hand kisses, cuddles, and even biting – your little permissions mean a lot.",
+    "You inspire me to become better – for myself and for us.",
+    "You supported me through IB stress – even when things got rough.",
+    "You mean so much to me, it hurts sometimes – in the best way.",
+    "You’re my favorite good morning and good night.",
+    "You’re the one I want to text 24/7.",
+    "You make me feel loved even when you’re distant.",
+    "You give me butterflies when I see your name on my screen.",
+    "You’re the one I wrote midnight messages for.",
+    "You let me call you 'My Future💍💘' — and you wear it proudly.",
+    "You pinky promise with me when words aren't enough.",
+    "You let me be emotional without judgment.",
+    "You give tough love when I mess up — like with the GDC.",
+    "You forgave me — even when I didn’t deserve it.",
+    "You reminded me of how love should feel — soft, powerful, sacred.",
+    "You said “love is blind, but I Dey see am for your eye.”",
+    "You’re the reason I picture marriage, kids, and our families united.",
+    "You’re my answered prayer — literally.",
+    "You hold space for me even when I’m scared to speak.",
+    "You kissed me and made it unforgettable.",
+    "You were my motivation through IB.",
+    "You make being in love easy — even when it's hard.",
+    "You never stop surprising me — even with milk as your only meal.",
+    "You’re the one I wrote love letters crying about.",
+    "You’re my peace — when the world gets too loud.",
+    "You understand me — even when I don’t understand myself.",
+    "You’re not afraid to call me out — but never to break me.",
+    "You let me plan a romantic website for you with your quotes floating.",
+    "You let me dream out loud — and dream with me.",
+    "You made me want to be a better man — husband, father, partner.",
+    "You’re my favorite argument — because we always find our way back.",
+    "You made courtroom roleplay fun — “Objection!” and all.",
+    "You gave me meaning to ‘nonchalant girlfriend vs chalant boyfriend’.",
+    "You make me smile without even trying.",
+    "You’re effortlessly beautiful — in looks and spirit.",
+    "You gave me the courage to say things I’ve never told anyone.",
+    "You were patient when I was scared to ask for a kiss.",
+    "You gave me so many ‘firsts’ I’ll never forget.",
+    "You let me see your soft side — and your fire.",
+    "You let me in — even when it was hard.",
+    "You’re my dream girl — the one I thought I’d never find.",
+    "You’re simply… Anaïs. And that’s more than enough."
+  ];
+
+  for (let i = 0; i < reasons.length; i++) {
+    const span = document.createElement("div");
+    span.classList.add("reason");
+    span.style.top = `${Math.random() * 90}%`;
+    span.style.left = `${Math.random() * 90}%`;
+    span.style.animationDuration = `${8 + Math.random() * 6}s`;
+    span.innerText = reasons[i];
+    document.body.appendChild(span);
+  }
+</script>
+
+</body>
+</html>
