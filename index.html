@@ -6,7 +6,7 @@
   <title>Login</title>
   <style>
     body {
-      background-color: #800080;
+      background: linear-gradient(to top, #800080, #ffc0cb);
       color: white;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
@@ -17,18 +17,31 @@
       margin: 0;
       overflow: hidden;
     }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      text-align: center;
+
+    .typewriter h1 {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid white;
+      animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
     }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
     .login-box {
       background-color: rgba(255, 255, 255, 0.2);
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 2;
     }
+
     input[type="text"], input[type="password"] {
       padding: 0.5rem;
       border: none;
@@ -36,6 +49,7 @@
       margin: 0.5rem 0;
       width: 100%;
     }
+
     button {
       background-color: white;
       color: #800080;
@@ -44,22 +58,97 @@
       border-radius: 0.5rem;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.3s ease;
     }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #ffc0ff;
+    }
+
     .quotes {
       position: absolute;
       bottom: 20px;
       text-align: center;
       font-style: italic;
       opacity: 0.8;
+      z-index: 2;
     }
+
     .quote {
       display: none;
       font-size: 1.2rem;
     }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      opacity: 0.4;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.4; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+
+    .poem {
+      margin-top: 20px;
+      white-space: pre-line;
+      text-align: center;
+      font-style: italic;
+      font-size: 1rem;
+      max-width: 80%;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome My Love 💜</h1>
+  <div class="hearts">
+    <div class="heart" style="left:10%; animation-delay:0s;"></div>
+    <div class="heart" style="left:30%; animation-delay:2s;"></div>
+    <div class="heart" style="left:50%; animation-delay:4s;"></div>
+    <div class="heart" style="left:70%; animation-delay:6s;"></div>
+    <div class="heart" style="left:90%; animation-delay:8s;"></div>
+  </div>
+
+  <div class="typewriter">
+    <h1>Welcome My Love 💜</h1>
+  </div>
+
   <div class="login-box">
     <form onsubmit="return login()">
       <input type="text" id="username" placeholder="Username" required><br>
@@ -68,12 +157,18 @@
     </form>
   </div>
 
+  <div class="poem" id="poemLines"></div>
+
   <div class="quotes">
     <div class="quote">"every set back is a set up for greater thing"<br>– Anais</div>
     <div class="quote">"les fous ne marchent pas avec les sages"<br>– Anais</div>
     <div class="quote">"live love laugh wicked"<br>– Anais</div>
     <div class="quote">"we can only be wicked together"<br>– Anais</div>
   </div>
+
+  <audio autoplay loop>
+    <source src="your-song.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const quotes = document.querySelectorAll('.quote');
@@ -86,6 +181,22 @@
     setInterval(showQuote, 4000);
     showQuote();
 
+    const poem = [
+      "Your love is my warmth, my light, my grace,",
+      "Even in darkness, I see your face.",
+      "No distance, no fear, no sorrow or time,",
+      "Could steal what we share — your heart is mine."
+    ];
+
+    let pIndex = 0;
+    function showPoem() {
+      if (pIndex < poem.length) {
+        document.getElementById("poemLines").innerText += poem[pIndex] + "\n";
+        pIndex++;
+      }
+    }
+    setInterval(showPoem, 3000);
+
     function login() {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
@@ -93,10 +204,32 @@
         window.location.href = "home.html";
         return false;
       } else {
-        alert("Wrong username or password, my love. Try again.");
+        alert("Wrong username or password, my love. Try again.\nHint: Maybe it's your nickname and our special year?");
         return false;
       }
     }
+
+    document.addEventListener("mousemove", function(e) {
+      const heart = document.createElement("div");
+      heart.innerText = "💖";
+      heart.style.position = "absolute";
+      heart.style.left = e.pageX + "px";
+      heart.style.top = e.pageY + "px";
+      heart.style.fontSize = "20px";
+      heart.style.pointerEvents = "none";
+      heart.style.animation = "floatAway 1s ease-out forwards";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes floatAway {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-50px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
