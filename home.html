@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #ffe6f0, #e6ccff);
+      background-color: #fff0f5;
       color: #4b0082;
       display: flex;
       flex-direction: column;
@@ -16,7 +16,6 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
     h1 {
@@ -26,7 +25,7 @@
 
     h2 {
       font-size: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
 
     .verse {
@@ -34,8 +33,8 @@
       bottom: 20px;
       font-style: italic;
       font-size: 1.2rem;
-      width: 100%;
       text-align: center;
+      width: 100%;
     }
 
     .menu {
@@ -81,48 +80,6 @@
       margin-top: 2rem;
       font-weight: bold;
     }
-
-    /* Floating heart animation */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: pink;
-      transform: rotate(45deg);
-      animation: float 8s infinite;
-      opacity: 0.7;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -141,7 +98,7 @@
   </div>
 
   <h1>Welcome My Princess 💜</h1>
-  <h2>Happy to call you mine</h2>
+  <h2>Every time I see you, I give thanks to God</h2>
 
   <div class="together" id="togetherTime"></div>
   <div class="verse" id="bibleVerse"></div>
@@ -169,21 +126,61 @@
       document.getElementById("togetherTime").innerText = togetherText;
     }
 
-    const bibleVerses = [/* -- 50 verses from previous reply -- */];
+    const bibleVerses = [
+      "Song of Solomon 3:4 – 'I have found the one whom my soul loves.'",
+      "1 Corinthians 13:4 – 'Love is patient, love is kind.'",
+      "Ecclesiastes 4:9 – 'Two are better than one.'",
+      "Philippians 1:3 – 'I thank my God every time I remember you.'",
+      "1 Peter 4:8 – 'Above all, love each other deeply.'",
+      "1 Corinthians 16:14 – 'Let all that you do be done in love.'",
+      "Psalm 126:3 – 'The Lord has done great things for us, and we are filled with joy.'",
+      "Song of Solomon 4:7 – 'You are altogether beautiful, my love; there is no flaw in you.'",
+      "Proverbs 31:10 – 'A wife of noble character who can find? She is worth far more than rubies.'",
+      "Genesis 2:18 – 'It is not good for the man to be alone. I will make a helper suitable for him.'",
+      "Ruth 1:16 – 'Where you go I will go, and where you stay I will stay.'",
+      "Colossians 3:14 – 'And over all these virtues put on love, which binds them all together in perfect unity.'",
+      "Romans 12:10 – 'Be devoted to one another in love. Honor one another above yourselves.'",
+      "Ephesians 4:2 – 'Be completely humble and gentle; be patient, bearing with one another in love.'",
+      "1 John 4:19 – 'We love because He first loved us.'",
+      "Proverbs 3:3-4 – 'Let love and faithfulness never leave you... then you will win favor and a good name.'",
+      "Matthew 19:6 – 'So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate.'",
+      "John 15:12 – 'My command is this: Love each other as I have loved you.'",
+      "1 John 4:7 – 'Dear friends, let us love one another, for love comes from God.'",
+      "1 John 3:18 – 'Let us not love with words or speech but with actions and in truth.'",
+      "Ephesians 5:25 – 'Husbands, love your wives, just as Christ loved the church.'",
+      "1 Thessalonians 3:12 – 'May the Lord make your love increase and overflow for each other.'",
+      "Hebrews 10:24 – 'And let us consider how we may spur one another on toward love and good deeds.'",
+      "Romans 13:10 – 'Love does no harm to a neighbor. Therefore love is the fulfillment of the law.'",
+      "Mark 10:9 – 'Therefore what God has joined together, let no one separate.'",
+      "1 Peter 3:7 – 'Husbands, be considerate as you live with your wives, and treat them with respect.'",
+      "Isaiah 62:5 – 'As a bridegroom rejoices over his bride, so will your God rejoice over you.'",
+      "Psalm 143:8 – 'Let the morning bring me word of your unfailing love.'",
+      "Lamentations 3:22 – 'Because of the Lord’s great love we are not consumed.'",
+      "Galatians 5:22 – 'But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness.'",
+      "Luke 6:31 – 'Do to others as you would have them do to you.'",
+      "Proverbs 17:17 – 'A friend loves at all times.'",
+      "Romans 5:8 – 'God demonstrates his own love for us in this: While we were still sinners, Christ died for us.'",
+      "Ephesians 3:17-18 – '...being rooted and established in love... to grasp how wide and long and high and deep is the love of Christ.'",
+      "Zephaniah 3:17 – 'He will rejoice over you with gladness; He will quiet you with His love.'",
+      "Psalm 36:7 – 'How priceless is your unfailing love, O God!'",
+      "John 3:16 – 'For God so loved the world...' ",
+      "Romans 8:38-39 – 'Nothing can separate us from the love of God that is in Christ Jesus our Lord.'",
+      "Psalm 33:5 – 'The earth is full of the Lord’s unfailing love.'",
+      "Micah 6:8 – 'Act justly, love mercy, and walk humbly with your God.'",
+      "Psalm 136:26 – 'Give thanks to the God of heaven. His love endures forever.'",
+      "Isaiah 54:10 – 'Though the mountains be shaken... yet my unfailing love for you will not be shaken.'",
+      "2 Thessalonians 3:5 – 'May the Lord direct your hearts into God’s love.'",
+      "1 Corinthians 13:13 – 'And now these three remain: faith, hope and love. But the greatest of these is love.'",
+      "Galatians 2:20 – 'I live by faith in the Son of God, who loved me and gave himself for me.'",
+      "Psalm 100:5 – 'For the Lord is good and his love endures forever.'",
+      "Deuteronomy 7:9 – 'Know therefore that the Lord your God is God; he is the faithful God, keeping his covenant of love.'",
+      "Hosea 2:19 – 'I will betroth you to me forever; I will betroth you in righteousness and justice, in love and compassion.'",
+      "Jeremiah 31:3 – 'I have loved you with an everlasting love; I have drawn you with unfailing kindness.'",
+      "1 John 4:16 – 'God is love. Whoever lives in love lives in God, and God in them.'"
+    ];
 
-    // Pick a random verse
-    const verse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
-    document.getElementById("bibleVerse").innerText = verse;
-
-    // Generate floating hearts
-    for (let i = 0; i < 25; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = `${Math.random() * 100}vw`;
-      heart.style.animationDuration = `${4 + Math.random() * 6}s`;
-      heart.style.width = heart.style.height = `${10 + Math.random() * 20}px`;
-      document.body.appendChild(heart);
-    }
+    const randomVerse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
+    document.getElementById("bibleVerse").innerText = randomVerse;
   </script>
 </body>
 </html>
