@@ -18,10 +18,42 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-top: 80px;
-    }
+  h1 {
+  font-size: 4rem;
+  margin-top: 80px;
+  font-family: 'Cursive', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  animation: heartbeat 1.5s infinite ease-in-out, glow 3s infinite alternate;
+  color: #800080;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #d8b4e2, 0 0 20px #d8b4e2, 0 0 30px #d8b4e2;
+  }
+  100% {
+    text-shadow: 0 0 20px #b266ff, 0 0 30px #c44dff, 0 0 40px #e066ff;
+  }
+}
+;
 
     h2 {
       font-size: 1.5rem;
