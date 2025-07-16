@@ -1,9 +1,9 @@
-<!-- Photo Gallery -->
+<!-- Gallery Section -->
 <section id="photos" class="gallery-section active">
-  <div class="image-gallery" id="imageGallery"></div>
+  <div class="gallery-grid" id="imageGallery"></div>
 </section>
 
-<!-- Custom Lightbox with Arrows -->
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <span class="close" onclick="closeLightbox()">&times;</span>
   <img id="lightbox-img" src="" alt="">
@@ -15,52 +15,23 @@
 </div>
 
 <style>
-  .lightbox {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    color: white;
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 30px;
   }
 
-  .lightbox img {
-    max-width: 80%;
-    max-height: 70vh;
-    margin-bottom: 10px;
-    border-radius: 12px;
-  }
-
-  .lightbox p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .lightbox .close {
-    position: absolute;
-    top: 20px; right: 30px;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-
-  .lightbox-controls {
-    position: absolute;
+  .gallery-grid img {
     width: 100%;
-    top: 50%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 40px;
+    height: auto;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
   }
 
-  .lightbox-controls span {
-    font-size: 2.5rem;
-    cursor: pointer;
-    user-select: none;
+  .gallery-grid img:hover {
+    transform: scale(1.03);
   }
 
   .image-caption {
@@ -69,12 +40,61 @@
     font-size: 1rem;
     color: white;
   }
+
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10000;
+    color: white;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
+  }
+
+  .lightbox p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .lightbox-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    transform: translateY(-50%);
+  }
+
+  .lightbox-controls span {
+    font-size: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
 </style>
 
 <script>
   const imageData = Array.from({ length: 58 }, (_, i) => ({
     src: `images/pic (${i + 1}).jpg`,
-    title: `Memory ${i + 1}` // <-- You can change these titles later
+    title: `Memory ${i + 1}` // You can customize each title here
   }));
 
   const gallery = document.getElementById('imageGallery');
@@ -86,7 +106,6 @@
 
   imageData.forEach((img, index) => {
     const container = document.createElement('div');
-    container.style.textAlign = 'center';
 
     const image = document.createElement('img');
     image.src = img.src;
@@ -128,10 +147,15 @@
     updateLightbox();
   }
 
-  // Close lightbox with Esc key
+  // Keyboard support
   document.addEventListener('keydown', (e) => {
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowLeft") prevImage();
     if (e.key === "ArrowRight") nextImage();
+  });
+
+  // Click outside image to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
   });
 </script>
