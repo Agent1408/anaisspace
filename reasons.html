@@ -1,104 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Reasons Why I Love You 💘</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
-      overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .reason {
+    header {
+      width: 100%;
+      background-color: #800080;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-btn {
       position: absolute;
-      background: #fff;
+      top: 15px;
+      left: 20px;
+      background-color: white;
+      color: #800080;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      background-color: #f3d1f5;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 90%;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      padding-bottom: 50px;
+    }
+
+    .reason-box {
+      background: white;
       border: 1px solid #800080;
       border-radius: 15px;
-      padding: 8px 12px;
-      font-size: 0.85rem;
+      padding: 15px;
+      font-size: 0.9rem;
       color: #800080;
-      box-shadow: 0 2px 10px rgba(128, 0, 128, 0.15);
-      animation: floatBounce 10s infinite ease-in-out;
-      white-space: nowrap;
-      max-width: 250px;
+      box-shadow: 0 3px 8px rgba(128, 0, 128, 0.1);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.4;
+      transition: transform 0.2s;
     }
 
-    @keyframes floatBounce {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-30px); }
-      100% { transform: translateY(0); }
+    .reason-box:hover {
+      transform: scale(1.02);
     }
   </style>
 </head>
 <body>
 
-<script>
-  const reasons = [
-    "You calm me – your presence alone brings peace I can’t explain.",
-    "You’re my safe space – even in silence, I feel at home with you.",
-    "You don’t talk when angry – because you care enough not to hurt me.",
-    "You challenge me – mentally, emotionally, and spiritually.",
-    "You make me laugh – no one cracks me up like you do.",
-    "You make me think – about life, love, future… everything.",
-    "You let me be chalant – while proudly being your nonchalant self.",
-    "You play the judge – and rule on my football games with conditions.",
-    "You allow hand kisses, cuddles, and even biting – your little permissions mean a lot.",
-    "You inspire me to become better – for myself and for us.",
-    "You supported me through IB stress – even when things got rough.",
-    "You mean so much to me, it hurts sometimes – in the best way.",
-    "You’re my favorite good morning and good night.",
-    "You’re the one I want to text 24/7.",
-    "You make me feel loved even when you’re distant.",
-    "You give me butterflies when I see your name on my screen.",
-    "You’re the one I wrote midnight messages for.",
-    "You let me call you 'My Future💍💘' — and you wear it proudly.",
-    "You pinky promise with me when words aren't enough.",
-    "You let me be emotional without judgment.",
-    "You give tough love when I mess up — like with the GDC.",
-    "You forgave me — even when I didn’t deserve it.",
-    "You reminded me of how love should feel — soft, powerful, sacred.",
-    "You said “love is blind, but I Dey see am for your eye.”",
-    "You’re the reason I picture marriage, kids, and our families united.",
-    "You’re my answered prayer — literally.",
-    "You hold space for me even when I’m scared to speak.",
-    "You kissed me and made it unforgettable.",
-    "You were my motivation through IB.",
-    "You make being in love easy — even when it's hard.",
-    "You never stop surprising me — even with milk as your only meal.",
-    "You’re the one I wrote love letters crying about.",
-    "You’re my peace — when the world gets too loud.",
-    "You understand me — even when I don’t understand myself.",
-    "You’re not afraid to call me out — but never to break me.",
-    "You let me plan a romantic website for you with your quotes floating.",
-    "You let me dream out loud — and dream with me.",
-    "You made me want to be a better man — husband, father, partner.",
-    "You’re my favorite argument — because we always find our way back.",
-    "You made courtroom roleplay fun — “Objection!” and all.",
-    "You gave me meaning to ‘nonchalant girlfriend vs chalant boyfriend’.",
-    "You make me smile without even trying.",
-    "You’re effortlessly beautiful — in looks and spirit.",
-    "You gave me the courage to say things I’ve never told anyone.",
-    "You were patient when I was scared to ask for a kiss.",
-    "You gave me so many ‘firsts’ I’ll never forget.",
-    "You let me see your soft side — and your fire.",
-    "You let me in — even when it was hard.",
-    "You’re my dream girl — the one I thought I’d never find.",
-    "You’re simply… Anaïs. And that’s more than enough."
-  ];
+<header>
+  <button class="menu-btn" onclick="window.location.href='index.html'">Menu</button>
+  <h1>Reasons Why I Love You 💘</h1>
+</header>
 
-  for (let i = 0; i < reasons.length; i++) {
-    const span = document.createElement("div");
-    span.classList.add("reason");
-    span.style.top = `${Math.random() * 90}%`;
-    span.style.left = `${Math.random() * 90}%`;
-    span.style.animationDuration = `${8 + Math.random() * 6}s`;
-    span.innerText = reasons[i];
-    document.body.appendChild(span);
-  }
-</script>
+<div class="container">
+  <div class="reason-box">You calm me – your presence alone brings peace I can’t explain.</div>
+  <div class="reason-box">You’re my safe space – even in silence, I feel at home with you.</div>
+  <div class="reason-box">You don’t talk when angry – because you care enough not to hurt me.</div>
+  <div class="reason-box">You challenge me – mentally, emotionally, and spiritually.</div>
+  <div class="reason-box">You make me laugh – no one cracks me up like you do.</div>
+  <div class="reason-box">You make me think – about life, love, future… everything.</div>
+  <div class="reason-box">You let me be chalant – while proudly being your nonchalant self.</div>
+  <div class="reason-box">You play the judge – and rule on my football games with conditions.</div>
+  <div class="reason-box">You allow hand kisses, cuddles, and even biting – your little permissions mean a lot.</div>
+  <div class="reason-box">You inspire me to become better – for myself and for us.</div>
+  <div class="reason-box">You supported me through IB stress – even when things got rough.</div>
+  <div class="reason-box">You mean so much to me, it hurts sometimes – in the best way.</div>
+  <div class="reason-box">You’re my favorite good morning and good night.</div>
+  <div class="reason-box">You’re the one I want to text 24/7.</div>
+  <div class="reason-box">You make me feel loved even when you’re distant.</div>
+  <div class="reason-box">You give me butterflies when I see your name on my screen.</div>
+  <div class="reason-box">You’re the one I wrote midnight messages for.</div>
+  <div class="reason-box">You let me call you 'My Future💍💘' — and you wear it proudly.</div>
+  <div class="reason-box">You pinky promise with me when words aren't enough.</div>
+  <div class="reason-box">You let me be emotional without judgment.</div>
+  <div class="reason-box">You give tough love when I mess up — like with the GDC.</div>
+  <div class="reason-box">You forgave me — even when I didn’t deserve it.</div>
+  <div class="reason-box">You reminded me of how love should feel — soft, powerful, sacred.</div>
+  <div class="reason-box">You said “love is blind, but I Dey see am for your eye.”</div>
+  <div class="reason-box">You’re the reason I picture marriage, kids, and our families united.</div>
+  <div class="reason-box">You’re my answered prayer — literally.</div>
+  <div class="reason-box">You hold space for me even when I’m scared to speak.</div>
+  <div class="reason-box">You kissed me and made it unforgettable.</div>
+  <div class="reason-box">You were my motivation through IB.</div>
+  <div class="reason-box">You make being in love easy — even when it's hard.</div>
+  <div class="reason-box">You never stop surprising me — even with milk as your only meal.</div>
+  <div class="reason-box">You’re the one I wrote love letters crying about.</div>
+  <div class="reason-box">You’re my peace — when the world gets too loud.</div>
+  <div class="reason-box">You understand me — even when I don’t understand myself.</div>
+  <div class="reason-box">You’re not afraid to call me out — but never to break me.</div>
+  <div class="reason-box">You let me plan a romantic website for you with your quotes floating.</div>
+  <div class="reason-box">You let me dream out loud — and dream with me.</div>
+  <div class="reason-box">You made me want to be a better man — husband, father, partner.</div>
+  <div class="reason-box">You’re my favorite argument — because we always find our way back.</div>
+  <div class="reason-box">You made courtroom roleplay fun — “Objection!” and all.</div>
+  <div class="reason-box">You gave me meaning to ‘nonchalant girlfriend vs chalant boyfriend’.</div>
+  <div class="reason-box">You make me smile without even trying.</div>
+  <div class="reason-box">You’re effortlessly beautiful — in looks and spirit.</div>
+  <div class="reason-box">You gave me the courage to say things I’ve never told anyone.</div>
+  <div class="reason-box">You were patient when I was scared to ask for a kiss.</div>
+  <div class="reason-box">You gave me so many ‘firsts’ I’ll never forget.</div>
+  <div class="reason-box">You let me see your soft side — and your fire.</div>
+  <div class="reason-box">You let me in — even when it was hard.</div>
+  <div class="reason-box">You’re my dream girl — the one I thought I’d never find.</div>
+  <div class="reason-box">You’re simply… Anaïs. And that’s more than enough.</div>
+</div>
 
 </body>
 </html>
